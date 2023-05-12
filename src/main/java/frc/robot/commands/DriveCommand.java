@@ -32,7 +32,7 @@ public class DriveCommand extends CommandBase {
     double ForwardSpeed = RobotContainer.driveController.getLeftX();
     double TurnSpeed = RobotContainer.driveController.getLeftY();
 
-    drive.drive(ForwardSpeed*.4, TurnSpeed*.4);
+    drive.drive(ForwardSpeed*.8, TurnSpeed*.8);
   }
 
   // Called once the command ends or is interrupted.

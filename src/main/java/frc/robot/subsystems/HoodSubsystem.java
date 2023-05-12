@@ -4,14 +4,19 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class HoodSubsystem extends SubsystemBase {
-  public Solenoid TurretHood = new Solenoid(PneumaticsModuleType.REVPH, 15);
+  PneumaticHub pneumatics = new PneumaticHub(1);
+  public Solenoid TurretHood;
   /** Creates a new HoodSubsystem. */
-  public HoodSubsystem() {}
+  public HoodSubsystem() {
+    pneumatics.enableCompressorAnalog(80, 100);
+    TurretHood = pneumatics.makeSolenoid(15);
+  }
 
   public void HoodUp(){
     TurretHood.set(true);
