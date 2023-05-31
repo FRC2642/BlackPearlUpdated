@@ -18,12 +18,8 @@ public class HoodSubsystem extends SubsystemBase {
     TurretHood = pneumatics.makeSolenoid(15);
   }
 
-  public void HoodUp(){
-    TurretHood.set(true);
-  }
-
-  public void HoodDown(){
-    TurretHood.set(false);
+  public void setHood(boolean hoodStatus){
+    TurretHood.set(hoodStatus);
   }
 
   @Override

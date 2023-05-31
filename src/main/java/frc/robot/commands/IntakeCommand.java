@@ -6,17 +6,19 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.IntakeSubsystem;
 
-public class SpinIntakeWheels extends CommandBase {
-  /** Creates a new SpinBigWheel. */
-  private final IntakeSubsystem intake;
+public class IntakeCommand extends CommandBase {
+  /** Creates a new IntakeCommand. */
   private final XboxController auxController;
-  public SpinIntakeWheels(IntakeSubsystem intake, XboxController controller) {
+  private final IntakeSubsystem intake;
+  private boolean intakeExtended = false;
+
+  public IntakeCommand(IntakeSubsystem intake, XboxController controller) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.intake = intake;
     this.auxController = controller;
+    
     addRequirements(intake);
   }
 
@@ -27,8 +29,29 @@ public class SpinIntakeWheels extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double Speed = auxController.getLeftTriggerAxis();
-    intake.spinIntake(Speed);
+    double speed = auxController.getLeftTriggerAxis();
+    if (speed > .1){
+      intake.spinIntake(speed);
+    }
+    else{
+      intake.spinIntake(0);
+    }
+
+    if(auxController.getAButtonPressed()){
+      if(intakeExtended){
+        intakeExtended = false;
+        intake.setIntake(intakeExtended);
+      }
+
+      else{
+        intakeExtended = false;
+        intake.setIntake(intakeExtended);
+      }
+    }
+
+  
+
+
   }
 
   // Called once the command ends or is interrupted.

@@ -6,15 +6,12 @@ package frc.robot;
 
 
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.HoodDownCommand;
+import frc.robot.commands.HoodCommand;
 import frc.robot.commands.HoodUpCommand;
-import frc.robot.commands.IntakePistonExtend;
-import frc.robot.commands.IntakePistonRetract;
-import frc.robot.commands.RunMagBackward;
-import frc.robot.commands.RunMagForward;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.MoveMagCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.commands.SpinIntakeWheels;
-import frc.robot.commands.StopTheMag;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.HoodSubsystem;
@@ -37,45 +34,50 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
-  //Stuff For DriveTrain
-  public DriveSubsystem driveSubsystem = new DriveSubsystem();
-  private DriveCommand driveCommand = new DriveCommand(driveSubsystem);
+  //Controller & Buttons
+  public final static XboxController driveController = new XboxController(0);
+  public final static XboxController auxController = new XboxController(1);
 
+  //Stuff For DriveTrain
+  public final DriveSubsystem driveSubsystem = new DriveSubsystem();
+  public final DriveCommand driveCommand = new DriveCommand(driveSubsystem, auxController);
   //Shooter
-  public ShootingSubsystem shootingSubsystem = new ShootingSubsystem();
+  public final ShootingSubsystem shootingSubsystem = new ShootingSubsystem();
 
   //Stuff for the Intake
-  public IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  public IntakePistonExtend extendCommand = new IntakePistonExtend(intakeSubsystem);
+  public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  public final IntakeCommand intakeCommand = new IntakeCommand(intakeSubsystem, auxController);
+  /* public IntakePistonExtend extendCommand = new IntakePistonExtend(intakeSubsystem);
   public IntakePistonRetract retractCommand = new IntakePistonRetract(intakeSubsystem);
-  public SpinIntakeWheels WheelCommand = new SpinIntakeWheels(intakeSubsystem);
+  public SpinIntakeWheels WheelCommand = new SpinIntakeWheels(intakeSubsystem); */
 
   //Stuff for the Magazine Belt
-  public MagazineSubsystem magazineSubsystem = new MagazineSubsystem();
-  public RunMagForward magForward = new RunMagForward(magazineSubsystem);
+  public final MagazineSubsystem magazineSubsystem = new MagazineSubsystem();
+  public final MoveMagCommand magazineCommand = new MoveMagCommand(magazineSubsystem, auxController);
+  /*public RunMagForward magForward = new RunMagForward(magazineSubsystem);
   public RunMagBackward magBackward = new RunMagBackward(magazineSubsystem);
-  public StopTheMag StopMag = new StopTheMag(magazineSubsystem);
+  public StopTheMag StopMag = new StopTheMag(magazineSubsystem); */
+
 
   //Stuff for the Hood
-  public HoodSubsystem hoodSubsystem = new HoodSubsystem();
-  public HoodDownCommand hoodDown = new HoodDownCommand(hoodSubsystem);
-  public HoodUpCommand HoodUp = new HoodUpCommand(hoodSubsystem);
+  public final HoodSubsystem hoodSubsystem = new HoodSubsystem();
+  public final HoodCommand hoodCommand = new HoodCommand(hoodSubsystem, auxController);
+  /* public HoodDownCommand hoodDown = new HoodDownCommand(hoodSubsystem);
+  public HoodUpCommand HoodUp = new HoodUpCommand(hoodSubsystem); */
 
   //Stuff for the Camera
-  public CameraSubsystem cameraSubsystem = new CameraSubsystem();
+  public final CameraSubsystem cameraSubsystem = new CameraSubsystem();
 
 
-  //Controller & Buttons
-  public static XboxController driveController = new XboxController(0);
-  public static XboxController auxController = new XboxController(1);
 
-  Trigger auxRightTrigger = new Trigger(shootingSubsystem::getAuxRightTrigger);
-  Trigger aButton = new JoystickButton(auxController, 1);
-  Trigger bButton = new JoystickButton(auxController, 2);
-  Trigger yButton = new JoystickButton(auxController, 4);
-  Trigger xButton = new JoystickButton(auxController, 3);
-  Trigger RightBumper = new JoystickButton(auxController, 6);
-  Trigger LeftBumper = new JoystickButton(auxController, 5);
+
+  public final Trigger auxRightTrigger = new Trigger(shootingSubsystem::getAuxRightTrigger);
+  //Trigger aButton = new JoystickButton(auxController, 1);
+  //Trigger bButton = new JoystickButton(auxController, 2);
+  //Trigger yButton = new JoystickButton(auxController, 4);
+ // Trigger xButton = new JoystickButton(auxController, 3);
+  //Trigger RightBumper = new JoystickButton(auxController, 6);
+  //Trigger LeftBumper = new JoystickButton(auxController, 5);
  
   
 
@@ -86,8 +88,11 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
-    driveSubsystem.setDefaultCommand(new DriveCommand(driveSubsystem));
-    intakeSubsystem.setDefaultCommand(new SpinIntakeWheels(intakeSubsystem));
+    driveSubsystem.setDefaultCommand(new DriveCommand(driveSubsystem, auxController));
+    intakeSubsystem.setDefaultCommand(new IntakeCommand(intakeSubsystem, auxController));
+    magazineSubsystem.setDefaultCommand(new MoveMagCommand(magazineSubsystem, auxController));
+    hoodSubsystem.setDefaultCommand(new HoodCommand(hoodSubsystem, auxController));
+
     // Configure the trigger bindings
     configureBindings();
 
@@ -121,20 +126,20 @@ public class RobotContainer {
 
     
     
-    LeftBumper.onTrue(retractCommand);
-    RightBumper.onTrue(extendCommand);
+    /* LeftBumper.onTrue(retractCommand);
+    RightBumper.onTrue(extendCommand); */
     
 
-    bButton.whileTrue(magForward);//If the 'B' button is pressed the mag goes up
+    /* bButton.whileTrue(magForward);//If the 'B' button is pressed the mag goes up
     bButton.whileFalse(StopMag);//If not the mag doesn't move
 
     yButton.whileTrue(magBackward);//If the 'Y' button is pressed the mag goes down;
-    yButton.whileFalse(StopMag);//If not the mag doesn't move
+    yButton.whileFalse(StopMag);//If not the mag doesn't move */
 
     //xButton.toggleOnFalse(hoodDown);//if the 'X' button isn't pressed the intake pistons retract
     
-    xButton.onTrue(hoodDown);//if the 'A' is pressed the intake pistons extend
-    aButton.onTrue(HoodUp);
+    /*  xButton.onTrue(hoodDown);//if the 'A' is pressed the intake pistons extend
+    aButton.onTrue(HoodUp); */
 
     new POVButton(auxController, 0).whileTrue(new RunCommand(
       () -> shootingSubsystem.setSpeed(900), shootingSubsystem
@@ -166,8 +171,8 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   
-  /*  public Command getAutonomousCommand() {
+   /*  public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return new DriveCommand(drive);
+    return 
   } */
 }

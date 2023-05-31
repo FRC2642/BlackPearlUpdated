@@ -25,6 +25,11 @@ public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {}
 
+  public void setIntake(Boolean IntakeStatus){
+    RightIntakePiston.set(IntakeStatus);
+  }
+
+  /* 
   public void IntakePistonExtend() {
     RightIntakePiston.set(true);
   }
@@ -32,8 +37,8 @@ public class IntakeSubsystem extends SubsystemBase {
   public void IntakePistonRetract(){
     RightIntakePiston.set(false);
   }
-
-  public void allWheelsForward( double speed){
+  */
+  public void spinIntake( double speed){
     IntakeBigWheel.set(speed);
     IntakeMotor.set(speed);
   }
@@ -41,7 +46,8 @@ public class IntakeSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    /*
     SmartDashboard.putNumber("RT Pressed", RobotContainer.driveController.getRightTriggerAxis());
-    SmartDashboard.putBoolean("A Pressed", RobotContainer.driveController.getAButton());
+    SmartDashboard.putBoolean("A Pressed", RobotContainer.driveController.getAButton());*/
   }
 }

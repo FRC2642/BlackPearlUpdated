@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
@@ -12,12 +13,14 @@ import frc.robot.subsystems.DriveSubsystem;
 public class DriveCommand extends CommandBase {
   /** Creates a new DriveCommand. */
 
-  DriveSubsystem drive;
+  private final DriveSubsystem drive;
+  private final XboxController driveController;
 
-  public DriveCommand(DriveSubsystem drive) {
+  public DriveCommand(DriveSubsystem drive, XboxController Controller) {
     // Use addRequirements() here to declare subsystem dependencies.
 
     this.drive = drive;
+    this.driveController = Controller;
     addRequirements(drive);
   }
 
@@ -29,10 +32,10 @@ public class DriveCommand extends CommandBase {
   @Override
   public void execute() {
 
-    double ForwardSpeed = RobotContainer.driveController.getLeftX();
-    double TurnSpeed = RobotContainer.driveController.getLeftY();
+    double ForwardSpeed = driveController.getLeftX();
+    double TurnSpeed = driveController.getLeftY();
 
-    drive.drive(ForwardSpeed*.8, TurnSpeed*.8);
+    drive.drive(ForwardSpeed*.4, TurnSpeed*.4);
   }
 
   // Called once the command ends or is interrupted.
