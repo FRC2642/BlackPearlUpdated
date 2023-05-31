@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class HoodSubsystem extends SubsystemBase {
-  PneumaticHub pneumatics = new PneumaticHub(1);
-  public Solenoid TurretHood;
-  /** Creates a new HoodSubsystem. */
+  private PneumaticHub pneumatics = new PneumaticHub(1);
+  private Solenoid TurretHood;
+  
   public HoodSubsystem() {
     pneumatics.enableCompressorAnalog(80, 100);
     TurretHood = pneumatics.makeSolenoid(15);
@@ -23,7 +23,5 @@ public class HoodSubsystem extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+  public void periodic() {}
 }

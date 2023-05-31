@@ -17,37 +17,22 @@ import frc.robot.RobotContainer;
 
 public class IntakeSubsystem extends SubsystemBase {
 
-  public CANSparkMax IntakeMotor = new CANSparkMax(Constants.INTAKE_MOTOR_ID, MotorType.kBrushless);
-  public CANSparkMax IntakeBigWheel = new CANSparkMax(Constants.INTAKE_BIGWHEEL_ID, MotorType.kBrushless);
+  private CANSparkMax IntakeMotor = new CANSparkMax(Constants.INTAKE_MOTOR_ID, MotorType.kBrushless);
+  private CANSparkMax IntakeBigWheel = new CANSparkMax(Constants.INTAKE_BIGWHEEL_ID, MotorType.kBrushless);
 
-  Solenoid RightIntakePiston = new Solenoid(PneumaticsModuleType.REVPH, 0);
+  private Solenoid RightIntakePiston = new Solenoid(PneumaticsModuleType.REVPH, 0);
 
-  /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {}
 
   public void setIntake(Boolean IntakeStatus){
     RightIntakePiston.set(IntakeStatus);
   }
 
-  /* 
-  public void IntakePistonExtend() {
-    RightIntakePiston.set(true);
-  }
-
-  public void IntakePistonRetract(){
-    RightIntakePiston.set(false);
-  }
-  */
   public void spinIntake( double speed){
     IntakeBigWheel.set(speed);
     IntakeMotor.set(speed);
   }
 
   @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-    /*
-    SmartDashboard.putNumber("RT Pressed", RobotContainer.driveController.getRightTriggerAxis());
-    SmartDashboard.putBoolean("A Pressed", RobotContainer.driveController.getAButton());*/
-  }
+  public void periodic() {}
 }

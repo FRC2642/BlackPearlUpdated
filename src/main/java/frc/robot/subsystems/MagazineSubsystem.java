@@ -13,28 +13,25 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class MagazineSubsystem extends SubsystemBase {
   /** Creates a new MagazineSubsystem. */
 
-  CANSparkMax MagBeltMotor = new CANSparkMax(13, MotorType.kBrushless);
+  private CANSparkMax MagBeltMotor = new CANSparkMax(13, MotorType.kBrushless);
 
-  DigitalInput UpperLightSensor = new DigitalInput(0);
-  DigitalInput LowerLightSensor = new DigitalInput(1);
+  private DigitalInput UpperLightSensor = new DigitalInput(0);
+  private DigitalInput LowerLightSensor = new DigitalInput(1);
 
   public MagazineSubsystem() {}
 
-  
-  public void MagBeltForward(){
-    MagBeltMotor.set(.5);
+  public void setMagSpeed(double speed){
+    MagBeltMotor.set(speed);
   }
 
-  public void MagBeltBackward(){
-    MagBeltMotor.set(-.5);
+  public boolean isOneBallThere(){
+    return !areTwoBallsThere() && (UpperLightSensor.get() || LowerLightSensor.get());
   }
-  
-  public void StopMagBelt(){
-    MagBeltMotor.set(0);
+
+  public boolean areTwoBallsThere(){
+    return UpperLightSensor.get() && LowerLightSensor.get();
   }
 
   @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+  public void periodic() {}
 }

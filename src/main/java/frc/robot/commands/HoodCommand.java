@@ -9,23 +9,20 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.HoodSubsystem;
 
 public class HoodCommand extends CommandBase {
-  /** Creates a new HoodCommand. */
+  
   private final HoodSubsystem hood;
   private final XboxController auxController;
 
   private boolean hoodUp = false;
   public HoodCommand(HoodSubsystem hood, XboxController controller) {
-    // Use addRequirements() here to declare subsystem dependencies.
     this.hood = hood;
     this.auxController = controller;
     addRequirements(hood);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if(auxController.getXButtonPressed()){
@@ -39,15 +36,8 @@ public class HoodCommand extends CommandBase {
         hood.setHood(hoodUp);
       }
     }
-
-    
   }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
-
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

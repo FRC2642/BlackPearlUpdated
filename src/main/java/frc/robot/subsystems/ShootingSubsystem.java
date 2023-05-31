@@ -24,7 +24,7 @@ import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class ShootingSubsystem extends SubsystemBase {
-  /** Creates a new ShootingSubsystem. */
+  
   private static ShootingSubsystem instance;
   public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM;
   public double targetVelocity;
@@ -98,7 +98,6 @@ public class ShootingSubsystem extends SubsystemBase {
    }
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
     if (isCloseToSetRPM()){
       candle.setLEDs(0, 255, 0);
     }

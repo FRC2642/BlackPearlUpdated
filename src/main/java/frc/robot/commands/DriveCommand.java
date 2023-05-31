@@ -11,24 +11,19 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class DriveCommand extends CommandBase {
-  /** Creates a new DriveCommand. */
 
   private final DriveSubsystem drive;
   private final XboxController driveController;
 
   public DriveCommand(DriveSubsystem drive, XboxController Controller) {
-    // Use addRequirements() here to declare subsystem dependencies.
-
     this.drive = drive;
     this.driveController = Controller;
     addRequirements(drive);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
@@ -38,11 +33,6 @@ public class DriveCommand extends CommandBase {
     drive.drive(ForwardSpeed*.4, TurnSpeed*.4);
   }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
-
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

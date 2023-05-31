@@ -17,39 +17,24 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveSubsystem extends SubsystemBase {
-  /** Creates a new DriveSubsystem. */
 
+  private WPI_TalonFX frontLeft = new WPI_TalonFX(Constants.FRONT_LEFT_TALON_ID); 
+  private WPI_TalonFX backLeft = new WPI_TalonFX(Constants.BACK_LEFT_TALON_ID); 
+  private WPI_TalonFX frontRight = new WPI_TalonFX(Constants.FRONT_RIGHT_TALON_ID);
+  private WPI_TalonFX backRight = new WPI_TalonFX(Constants.BACK_RIGHT_TALON_ID);
 
-  WPI_TalonFX frontLeft = new WPI_TalonFX(Constants.FRONT_LEFT_TALON_ID); 
-  WPI_TalonFX backLeft = new WPI_TalonFX(Constants.BACK_LEFT_TALON_ID); 
-  WPI_TalonFX frontRight = new WPI_TalonFX(Constants.FRONT_RIGHT_TALON_ID);
-  WPI_TalonFX backRight = new WPI_TalonFX(Constants.BACK_RIGHT_TALON_ID);
+  private MotorControllerGroup RightMotors = new MotorControllerGroup(frontRight, backRight);
+  private MotorControllerGroup LeftMotors = new MotorControllerGroup(frontLeft, backLeft);
 
-  MotorControllerGroup Right = new MotorControllerGroup(frontRight, backRight);
-  MotorControllerGroup Left = new MotorControllerGroup(frontLeft, backLeft);
+  private DifferentialDrive DifferentialDrive = new DifferentialDrive(LeftMotors, RightMotors);
 
-  DifferentialDrive DifferentialDrive = new DifferentialDrive(Left, Right);
+  public DriveSubsystem(){}
 
-  double FR_Encoder = frontRight.getSelectedSensorPosition();
-  double FL_Encoder = frontLeft.getSelectedSensorPosition();
-
-  //private static DriveSubsystem instance;
-
-  public DriveSubsystem() {
-    //instance = this;
-  }
-
-  public void drive (double ForwardSpeed, double TurnSpeed){
+  public void drive(double ForwardSpeed, double TurnSpeed){
     DifferentialDrive.arcadeDrive(ForwardSpeed, TurnSpeed);
   }
 
-  
-  
-
   @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-    SmartDashboard.putNumber("FR EncoderTics", FL_Encoder);
-    SmartDashboard.putNumber("FL EncoderTicks", FR_Encoder);
-  }
+  public void periodic() {}
+
 }
