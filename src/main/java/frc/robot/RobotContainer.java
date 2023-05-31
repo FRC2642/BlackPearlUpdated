@@ -7,11 +7,9 @@ package frc.robot;
 
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.HoodCommand;
-import frc.robot.commands.HoodUpCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.MoveMagCommand;
 import frc.robot.commands.ShootCommand;
-import frc.robot.commands.SpinIntakeWheels;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.HoodSubsystem;
