@@ -27,12 +27,19 @@ public class DriveCommand extends CommandBase {
   @Override
   public void execute() {
 
-    double ForwardSpeed = driveController.getLeftX();
-    double TurnSpeed = driveController.getLeftY();
+    double ForwardSpeed = driveController.getLeftY();
+    double TurnSpeed = driveController.getLeftX();
 
-    drive.drive(ForwardSpeed*.4, TurnSpeed*.4);
+    if (driveController.getXButton()){
+      ForwardSpeed = ForwardSpeed * 1;
+    }
+    else{
+      ForwardSpeed = ForwardSpeed * 0.4;
+    }
+
+    drive.drive(ForwardSpeed, TurnSpeed*.4);
   }
-
+  
   @Override
   public boolean isFinished() {
     return false;
