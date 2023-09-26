@@ -38,20 +38,20 @@ public class RobotContainer {
 
   //Stuff For DriveTrain
   public final DriveSubsystem driveSubsystem = new DriveSubsystem();
-  public final DriveCommand driveCommand = new DriveCommand(driveSubsystem, auxController);
+  public final DriveCommand driveCommand = new DriveCommand(driveSubsystem, driveController);
   //Shooter
   public final ShootingSubsystem shootingSubsystem = new ShootingSubsystem();
 
   //Stuff for the Intake
   public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  public final IntakeCommand intakeCommand = new IntakeCommand(intakeSubsystem, auxController);
+  public final IntakeCommand intakeCommand = new IntakeCommand(intakeSubsystem, driveController);
   /* public IntakePistonExtend extendCommand = new IntakePistonExtend(intakeSubsystem);
   public IntakePistonRetract retractCommand = new IntakePistonRetract(intakeSubsystem);
   public SpinIntakeWheels WheelCommand = new SpinIntakeWheels(intakeSubsystem); */
 
   //Stuff for the Magazine Belt
   public final MagazineSubsystem magazineSubsystem = new MagazineSubsystem();
-  public final MoveMagCommand magazineCommand = new MoveMagCommand(magazineSubsystem, auxController);
+  public final MoveMagCommand magazineCommand = new MoveMagCommand(magazineSubsystem, driveController);
   /*public RunMagForward magForward = new RunMagForward(magazineSubsystem);
   public RunMagBackward magBackward = new RunMagBackward(magazineSubsystem);
   public StopTheMag StopMag = new StopTheMag(magazineSubsystem); */
@@ -86,9 +86,9 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
-    driveSubsystem.setDefaultCommand(new DriveCommand(driveSubsystem, auxController));
-    intakeSubsystem.setDefaultCommand(new IntakeCommand(intakeSubsystem, auxController));
-    magazineSubsystem.setDefaultCommand(new MoveMagCommand(magazineSubsystem, auxController));
+    driveSubsystem.setDefaultCommand(new DriveCommand(driveSubsystem, driveController));
+    intakeSubsystem.setDefaultCommand(new IntakeCommand(intakeSubsystem, driveController));
+    magazineSubsystem.setDefaultCommand(new MoveMagCommand(magazineSubsystem, driveController));
     //hoodSubsystem.setDefaultCommand(new HoodCommand(hoodSubsystem, auxController));
 
     // Configure the trigger bindings
