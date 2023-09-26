@@ -17,6 +17,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -78,6 +79,10 @@ public class ShootingSubsystem extends SubsystemBase {
    public void setSpeed(double speed){
     pidController.setReference(speed, CANSparkMax.ControlType.kVelocity);
     targetVelocity = speed;
+   }
+
+   public void maxSpeed(){
+    shooter.set(1);
    }
 
    public double getShooterSpeed(){

@@ -58,8 +58,8 @@ public class RobotContainer {
 
 
   //Stuff for the Hood
-  public final HoodSubsystem hoodSubsystem = new HoodSubsystem();
-  public final HoodCommand hoodCommand = new HoodCommand(hoodSubsystem, auxController);
+  //public final HoodSubsystem hoodSubsystem = new HoodSubsystem();
+  //public final HoodCommand hoodCommand = new HoodCommand(hoodSubsystem, auxController);
   /* public HoodDownCommand hoodDown = new HoodDownCommand(hoodSubsystem);
   public HoodUpCommand HoodUp = new HoodUpCommand(hoodSubsystem); */
 
@@ -89,7 +89,7 @@ public class RobotContainer {
     driveSubsystem.setDefaultCommand(new DriveCommand(driveSubsystem, auxController));
     intakeSubsystem.setDefaultCommand(new IntakeCommand(intakeSubsystem, auxController));
     magazineSubsystem.setDefaultCommand(new MoveMagCommand(magazineSubsystem, auxController));
-    hoodSubsystem.setDefaultCommand(new HoodCommand(hoodSubsystem, auxController));
+    //hoodSubsystem.setDefaultCommand(new HoodCommand(hoodSubsystem, auxController));
 
     // Configure the trigger bindings
     configureBindings();
@@ -140,25 +140,27 @@ public class RobotContainer {
     aButton.onTrue(HoodUp); */
 
     new POVButton(auxController, 0).whileTrue(new RunCommand(
-      () -> shootingSubsystem.setSpeed(900), shootingSubsystem
+      () -> shootingSubsystem.maxSpeed(), shootingSubsystem
     ));
 
     new POVButton(auxController, 90).whileTrue(new RunCommand(
-      () -> shootingSubsystem.setSpeed(2000), shootingSubsystem
+      () -> shootingSubsystem.setSpeed(500), shootingSubsystem
     ));
 
     new POVButton(auxController, 180).whileTrue(new RunCommand(
-      () -> shootingSubsystem.setSpeed(1500), shootingSubsystem
+      () -> shootingSubsystem.setSpeed(1000), shootingSubsystem
     ));
 
     new POVButton(auxController, 270).whileTrue(new RunCommand(
-      () -> shootingSubsystem.setSpeed(2500), shootingSubsystem
+      () -> shootingSubsystem.setSpeed(1500), shootingSubsystem
     ));
 
 
     auxRightTrigger.whileTrue(new RunCommand(
       () -> shootingSubsystem.setSpeed(5600), shootingSubsystem
     ));
+
+    
 
     
   }
